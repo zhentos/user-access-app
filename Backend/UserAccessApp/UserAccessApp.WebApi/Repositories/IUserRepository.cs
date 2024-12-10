@@ -7,7 +7,6 @@ namespace UserAccessApp.WebApi.Repositories
     {
         Task<IEnumerable<User>> GetAll();
         Task<User> GetByEmail(string email);
-        Task<bool> Update(User user);
         Task<int> UpdateUsersBatch(IEnumerable<UserUpdateDto> updates);
     }
 }

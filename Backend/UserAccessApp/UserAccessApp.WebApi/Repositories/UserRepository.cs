@@ -33,27 +33,6 @@ namespace UserAccessApp.WebApi.Repositories
             }
         }
 
-        public async Task<bool> Update(User user)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                try
-                {
-                    await connection.OpenAsync();
-                    var result = await connection.ExecuteAsync(
-                        "UPDATE Users SET FirstName = @FirstName, LastName = @LastName, Email = @Email," +
-                        " Password = @Password, PasswordSalt = @PasswordSalt, LastModifiedDate = GETDATE(), IsActive = @IsActive WHERE Id = @Id",
-                        user);
-                    return result > 0; // Return true if any rows were affected
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "An error occurred while updating the user.");
-                    return false; // Indicate failure to update
-                }
-            }
-        }
-
         public async Task<User> GetByEmail(string email)
         {
             using (var connection = new SqlConnection(_connectionString))
